@@ -1,44 +1,43 @@
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
-        List<Integer> result = new ArrayList<>();
-        if (matrix == null || matrix.length == 0) return result;
-        
-        int top = 0;
-        int bottom = matrix.length - 1;
-        int left = 0;
-        int right = matrix[0].length - 1;
-        
-        while (top <= bottom && left <= right) {
-            // Traverse from left to right along the top row
-            for (int col = left; col <= right; col++) {
-                result.add(matrix[top][col]);
+        ArrayList<Integer> list = new ArrayList<>();
+
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        int sr = 0;
+        int sc = 0;
+        int er = m - 1;
+        int ec = n - 1;
+
+        while (sr <= er && sc <= ec) {
+
+            for (int j = sc; j <= ec; j++) {
+                list.add(matrix[sr][j]);
             }
-            top++;
-            
-            // Traverse from top to bottom along the right column
-            for (int row = top; row <= bottom; row++) {
-                result.add(matrix[row][right]);
+
+            for (int i = sr + 1; i <= er; i++) {
+                list.add(matrix[i][ec]);
             }
-            right--;
-            
-            // Traverse from right to left along the bottom row
-            if (top <= bottom) {
-                for (int col = right; col >= left; col--) {
-                    result.add(matrix[bottom][col]);
+
+            for (int j = ec - 1; j >= sc; j--) {
+                if (sr != er) {
+                    list.add(matrix[er][j]);
                 }
-                bottom--;
             }
-            
-            // Traverse from bottom to top along the left column
-            if (left <= right) {
-                for (int row = bottom; row >= top; row--) {
-                    result.add(matrix[row][left]);
+            for (int i = er - 1; i > sr; i--) {
+                if (sc != ec) {
+                    list.add(matrix[i][sc]);
                 }
-                left++;
             }
+            sr++;
+            er--;
+            sc++;
+            ec--;
+
         }
-        
-        return result;
+        System.out.println(list);
+        return list;
     }
 }
 
