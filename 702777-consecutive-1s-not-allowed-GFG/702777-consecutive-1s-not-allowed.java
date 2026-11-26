@@ -1,19 +1,16 @@
 class Solution {
-    static int countStrings(int n) {
-        // Base cases
-        if (n == 1) return 2;
-        if (n == 2) return 3;
-
-        int prev2 = 2; // f(1)
-        int prev1 = 3; // f(2)
-        int current = 0;
-
-        for (int i = 3; i <= n; i++) {
-            current = prev1 + prev2;
-            prev2 = prev1;
-            prev1 = current;
+    int countStrings(int n) {
+        // code here
+        if(n == 1) return 2;
+        if(n == 2) return 3;
+        
+        int prv2 = 2,prv1 = 3;
+        for(int i = 3; i <= n; i++){
+            int curr = prv1 + prv2;
+            prv2 = prv1;
+            prv1 = curr;
         }
-        return current;
+        return prv1;
     }
 }
 
